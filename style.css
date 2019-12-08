@@ -1,3 +1,21 @@
+body {
+  background-color: #000;
+}
+
 #snakeCanvas {
-  border: 2px solid skyblue;
+  position: absolute;
+  top: 123px;
+  left: 33px;
+  width: 137px;
+  height: 97px;
+}
+
+.phone-wrapper {
+  background: url('nokia-3310.jpg') no-repeat;
+  background-size: cover;
+  height: 460px;
+  width: 197px;
+  margin: 0 auto;
+  color: #12261b;
+  position: relative;
 }

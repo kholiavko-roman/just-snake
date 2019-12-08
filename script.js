@@ -1,7 +1,16 @@
-const FRAMES = 15;
+const BG_COLOR = "#50713c";
+const COLOR = "#0b1010";
+const FRAMES = 5;
+const SIZE = 6;
 
 const canvas = document.getElementById("snakeCanvas");
 const context = canvas.getContext("2d");
+
+canvas.width = 134;
+canvas.height = 94;
+
+const canvasMaxWidth = Math.floor(canvas.width / SIZE);
+const canvasMaxHeight = Math.floor(canvas.height / SIZE);
 
 const snake = [
   { x: 0, y: 1 },
@@ -10,10 +19,7 @@ const snake = [
   { x: 1, y: 3 },
   { x: 1, y: 4 }
 ];
-let apple = { x: 9, y: 15 };
-
-context.scale(10, 10);
-
+let apple = generateRandomFood();
 let directions = { x: 1, y: 0 };
 
 const updateLoop = () => {
@@ -26,23 +32,41 @@ const updateLoop = () => {
   snake.unshift(tail);
 
   if (head.x === apple.x && head.y === apple.y) {
-    apple = { x: 0, y: 0 };
+    snake.push({ ...apple });
+    apple = generateRandomFood();
+  }
+
+  const newHead = snake[0];
+
+  for (let i = 1; i < snake.length; i++) {
+    const cell = snake[i];
+    if (cell.x === newHead.x && cell.y === newHead.y) {
+      console.log("Your are die 😥");
+    }
   }
 
   draw();
 };
 
 const draw = () => {
-  context.fillStyle = "black";
-  context.clearRect(0, 0, 320, 320);
+  context.fillStyle = BG_COLOR;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  context.fillStyle = COLOR;
 
   snake.forEach(({ x, y }) => {
-    context.fillRect(x, y, 1, 1);
+    context.fillRect(x * SIZE, y * SIZE, SIZE, SIZE);
   });
 
-  context.fillStyle = "red";
-  context.fillRect(apple.x, apple.y, 1, 1);
+  context.fillRect(apple.x * SIZE, apple.y * SIZE, SIZE, SIZE);
 };
+
+function generateRandomFood() {
+  return {
+    x: Math.floor(Math.random() * canvasMaxWidth),
+    y: Math.floor(Math.random() * canvasMaxHeight)
+  };
+}
 
 const handleKeyup = event => {
   switch (event.key) {
