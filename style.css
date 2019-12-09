@@ -5,17 +5,18 @@ body {
 #snakeCanvas {
   position: absolute;
   top: 123px;
-  left: 33px;
-  width: 137px;
+  left: 32px;
+  width: 140px;
   height: 97px;
+  border-radius: 8px;
 }
 
-.phone-wrapper {
+.phone {
   background: url('nokia-3310.jpg') no-repeat;
   background-size: cover;
   height: 460px;
   width: 197px;
   margin: 0 auto;
-  color: #12261b;
   position: relative;
+  border-radius: 30px/90px;
 }
